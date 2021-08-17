@@ -5,12 +5,16 @@ import com.springjwt.Domain.User;
 import com.springjwt.Service.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.net.http.HttpResponse;
 import java.util.List;
+
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,6 +39,10 @@ public class UserResource {
     public ResponseEntity<?> addTouser(@RequestBody RoleTouser from){
         userService.addRoleToUser(from.username,from.getRoleName());
         return  ResponseEntity.ok().build();
+    }
+    @GetMapping("/api/refreshtoken")
+    public void  refreshToken(HttpRequest httpRequest , HttpResponse httpResponse){
+       // String authorizationHeader=httpRequest.getHeader(AUTHORIZATION);
     }
     @Data
     private class RoleTouser {
